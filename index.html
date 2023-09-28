@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cálculo de Diluição de Água Oxigenada</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      label, input {
+        display: block;
+        margin-bottom: 10px;
+      }
+      button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #resultado {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+        border-radius: .25rem;
+        display: none; /* Adicionado para ocultar inicialmente */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cálculo de Diluição de Água Oxigenada</h1>
+      
+      <form>
+        <label for="concentracao">Concentração inicial de Água Oxigenada (em %):</label>
+        <input type="number" id="concentracao" name="concentracao" min="0" max="300" step="0.1" required><br><br>
+        
+        <label for="volume_inicial">Concentração Final de Água Oxigenada (em %):</label>
+        <input type="number" id="volume_inicial" name="volume_inicial" min="0" step="0.1" required><br><br>
+        
+        <label for="volume_final">Volume final da solução (em ml):</label>
+        <input type="number" id="volume_final" name="volume_final" min="0" step="0.1" required><br><br>
+        
+        
+        <button type="button" onclick="calcular()">Calcular</button>
+      </form>
+      
+      <p id="resultado"></p>
+      
+      <script>
+        function calcular() {
+          const concentracao = parseFloat(document.getElementById("concentracao").value);
+          const volume_inicial = parseFloat(document.getElementById("volume_inicial").value);
+          const volume_final = parseFloat(document.getElementById("volume_final").value);
+          
+          // c1*v1 = c2*v2
+          const concentracao_final = (volume_final * volume_inicial) / concentracao;
+          const volume_agua_oxigenada = volume_final - concentracao_final;
+          const volume_agua = volume_agua_oxigenada;
+
+          document.getElementById("resultado").innerHTML = `Para obter ${volume_final} ml de solução de [${volume_inicial}% de água oxigenada] usando [${concentracao}% de Água Oxigenada], é necessário diluir:<br><br>${concentracao_final.toFixed(2)} ml de Água Oxigenada ${concentracao}%<br>em<br>${volume_agua.toFixed(2)} ml de Água`;
+          document.getElementById("resultado").style.display = "block"; /* Adicionado para mostrar o resultado quando o cálculo é feito */
+        }
+      </script>
+      
+    </div>
+  </body>
+</html>
